@@ -1,0 +1,2 @@
+rules =[{"ruleName":"Rule1","fileNameModifire":"start","fileName":"log","fileSize":100,"fileOld":90,"fileNum":"","deleteOrBackup":"backup","conditionsForLog":[{"andor":"and","COndition1":"fSize"},{"andor":"","COndition1":"fOld"}]}]
+ module.exports=rules
