@@ -1,0 +1,125 @@
+<div class="container">
+  <div class="left">
+
+    <h2>Create Rules for logs</h2>
+
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+
+      <p>
+        <label for="ruleName">Rule Name:</label>
+        <input type="text" id="ruleName" name="ruleName" formControlName="ruleName" class="form-control">
+        <!-- <button type="button" (click)="addQuantity()" class="btn btn-primary">Add Conditions</button> -->
+        <td>
+          Log Name :
+        </td>
+        <td>
+          <select formControlName="fileNameModifire" (change)="sizeorDays($event.target.value)">
+            <option value='start'>Starts with</option>
+            <option value='contains'>Contains </option>
+            <option value='ends'>Ends with </option>
+
+          </select>
+        </td>
+        <td>
+          <input type="text" formControlName="fileName" class="form-control">
+        </td>
+        <td>
+          <button type="button" (click)="addQuantity()" class="btn btn-primary">Add Conditions</button>
+
+        </td>
+
+      </p>
+
+      <table class="table table-bordered" formArrayName="conditionsForLog">
+        <!-- <tr>
+        <th width="150px"></th>
+      </tr> -->
+        <tr *ngFor="let quantity of quantities().controls; let i=index" [formGroupName]="i">
+          <td>
+            <select formControlName="COndition1" (change)="sizeorDays($event.target.value)">
+              <option value='fSize'>File Size Reaches</option>
+              <option value='fOld'>Older </option>
+            </select> </td>
+          <td>
+
+            <input id="and" type="radio" value="and" (click)="addQuantity()" name="andor" formControlName="andor">
+            <label for="and">And</label>
+            <input id="or" type="radio" value="or" (click)="addQuantity()" name="andor" formControlName="andor">
+            <label for="or">Or</label>
+            <button type="button" (click)="removeQuantity(i)" class="btn btn-primary">Remove</button>
+
+          </td>
+        </tr>
+      </table>
+      <p>
+        <label *ngIf="size"> Maximum Size</label> <input *ngIf="size" type="number" formControlName="fileSize"
+          class="form-control">
+      </p>
+      <p>
+        <label *ngIf="old"> Old</label> <input *ngIf="old" type="number" formControlName="fileOld" class="form-control">
+      </p>
+      <p>
+        <label *ngIf="num"> Maximum Number</label> <input *ngIf="num" type="number" formControlName="fileNum"
+          class="form-control">
+
+      </p>
+
+      <p *ngIf="days">
+        No of days <input type="number" [(ngModel)]="noOfDays">
+      </p>
+
+      <input *ngIf="moveOrDelete" id="delete" type="radio" value="delete" name="deleteOrBackup"
+        formControlName="deleteOrBackup">
+      <label *ngIf="moveOrDelete" for="delete">Delete</label>
+      <input *ngIf="moveOrDelete" id="backup" type="radio" value="backup" name="deleteOrBackup"
+        formControlName="deleteOrBackup">
+      <label *ngIf="moveOrDelete" for="or">BackUp</label>
+      <button type="submit" class="btn btn-success">Create Rule</button>
+
+    </form>
+
+
+
+    <br />
+    Rules Created
+    <table>
+      <tr>
+        <th> Rule Name </th>
+        <th> File Name Condition </th>
+        <th> File Name </th>
+        <th> File Size </th>
+        <th> File Old </th>
+        <th> Delete/ BackUp </th>
+      </tr>
+      <tr>
+        <td> {{this.productForm.value.ruleName }} </td>
+        <td> {{this.productForm.value.fileNameModifire }} </td>
+        <td> {{this.productForm.value.fileName }} </td>
+        <td> {{this.productForm.value.fileSize }} </td>
+        <td> {{this.productForm.value.fileOld }} </td>
+        <td> {{this.productForm.value.deleteOrBackup }} </td>
+
+      </tr>
+    </table>
+
+  </div>
+
+  <div class="right">
+    <h2>Rule results</h2>
+
+    <table>
+      <tr *ngFor="let delete of deletedFiles">
+        <td>
+          {{delete}}
+        </td>
+      </tr>
+    </table>
+    <table>
+      <tr *ngFor="let delete of movedFiles">
+        <td>
+          {{delete}}
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

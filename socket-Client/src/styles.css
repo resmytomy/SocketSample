@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css?family=PT+Sans:400,700");
+@import url("https://fonts.googleapis.com/css?family=Inconsolata:400,700");
+
+:root {
+  /* Colors */
+  --body-background: #f9f9f9;
+  --navbar-background: #f2f2f2;
+  --navbar-options: #000000;
+  --navbar-options-hover: #ddd;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: var(--body-background);
+}
